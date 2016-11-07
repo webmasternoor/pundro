@@ -1,5 +1,5 @@
 # pundro_demo
-Pundro Automation:-
+University Automation:-
 
 Module-1: Dashboard <br/>
 Module-2: Admission & Record System <br/>
