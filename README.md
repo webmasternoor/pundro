@@ -1,8 +1,19 @@
 # pundro_demo
 Pundro Automation:-
 
-Module-1: test1 <br/>
-Module-2: test2 <br/>
-Module-3: test3 <br/>
-Module-4: test4 <br/>
-Module-5: test5 <br/>
+Module-1: Dashboard <br/>
+Module-2: Admission & Record System <br/>
+Module-3: Timetable System <br/>
+Module-4: Hostel Management System <br/>
+Module-5: Student Finance <br/>
+Module-6: Learning Management System <br/>
+Module-7: Student's Affairs <br/>
+Module-8: Examination System <br/>
+Module-9: Customer Relationship Management System <br/>
+Module-10: Human resource Management System <br/>
+Module-11: Facility/Asset & Store Management System <br/>
+Module-12: Conference/Research Management System <br/>
+Module-13: Management Information System <br/>
+Module-14: Library Maagement System <br/>
+Module-15: Transport <br/>
+Module-16: Notice Board
