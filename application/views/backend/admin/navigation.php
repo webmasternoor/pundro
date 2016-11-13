@@ -220,6 +220,11 @@
                         <span><i class="entypo-dot"></i> <?php echo get_phrase('admitted_student'); ?></span>
                     </a>
                 </li>
+                <li class="<?php if ($page_name == 'student_id_card') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/student_id_card">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('student_id_card'); ?></span>
+                    </a>
+                </li>
                 
                 <!-- <li class="<?php
                 if (

@@ -10422,7 +10422,6 @@ width: 100%;
             $data['CourseName']     = $this->input->post('CourseName');
             $data['ExamType']       = $this->input->post('ExamType');
             $data['DateDutyRoster'] = $this->input->post('DateDutyRoster');
-            //exit();
             $data['StartTime']      = $this->input->post('StartTime') + (12 * ($this->input->post('starting_ampm') - 1));
             $data['EndTime']        = $this->input->post('EndTime') + (12 * ($this->input->post('ending_ampm') - 1));
             $data['RoomNo']         = $this->input->post('RoomNo');
