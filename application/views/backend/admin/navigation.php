@@ -405,7 +405,8 @@
             $page_name == 'terms_trabulation_sheet' ||
             $page_name == 'final_trabulation_sheet' ||
             $page_name == 'term_progress_report' ||
-            $page_name == 'final_mark_sheet'
+            $page_name == 'final_mark_sheet'    ||
+            $page_name == 'duty_roster'
         )
             echo 'opened active';
         ?> ">
@@ -452,6 +453,11 @@
                 <li class="<?php if ($page_name == 'timetable_exam') echo 'active'; ?> ">
                     <a href="<?php echo base_url(); ?>index.php?admin/timetable_exam">
                         <span><i class="entypo-dot"></i> <?php echo get_phrase('calculate_GPA/CGPA'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'duty_roster') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/duty_roster">
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('exam_duty_roster'); ?></span>
                     </a>
                 </li>
             </ul>

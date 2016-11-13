@@ -10397,6 +10397,69 @@ width: 100%;
         $page_data['page_title'] =	get_phrase('student_attendance');
         $this->load->view('backend/index', $page_data);
     }
+    function duty_roster($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['ProgramName']    = $this->input->post('ProgramName');
+            $data['BatchName']      = $this->input->post('BatchName');
+            $data['SessionName']    = $this->input->post('SessionName');
+            $data['Year']           = $this->input->post('Year');
+            $data['SemesterName']   = $this->input->post('SemesterName');
+            $data['CourseName']     = $this->input->post('CourseName');
+            $data['ExamType']       = $this->input->post('ExamType');
+            $data['DateDutyRoster'] = $this->input->post('DateDutyRoster');
+            //exit();
+            $data['StartTime']      = $this->input->post('StartTime') + (12 * ($this->input->post('starting_ampm') - 1));
+            $data['EndTime']        = $this->input->post('EndTime') + (12 * ($this->input->post('ending_ampm') - 1));
+            $data['RoomNo']         = $this->input->post('RoomNo');
+            $data['InstructorId']   = $this->input->post('InstructorId');
+            $data['InstructorName'] = $this->input->post('InstructorName');
+            $data['Signature']      = $this->input->post('Signature');
+            $data['Remarks']        = $this->input->post('Remarks');
+
+            $this->db->insert('duty_roster', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/duty_roster/', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['ProgramName']    = $this->input->post('ProgramName');
+            $data['BatchName']      = $this->input->post('BatchName');
+            $data['Session']        = $this->input->post('Session');
+            $data['Year']           = $this->input->post('Year');
+            $data['Semester']       = $this->input->post('Semester');
+            $data['CourseName']     = $this->input->post('CourseName');
+            $data['Date']           = $this->input->post('Date');
+            $data['Time']           = $this->input->post('Time');
+            $data['RoomNo']         = $this->input->post('RoomNo');
+            $data['InstructorId']   = $this->input->post('InstructorId');
+            $data['InstructorName'] = $this->input->post('InstructorName');
+            $data['Signature']      = $this->input->post('Signature');
+            $data['Remarks']        = $this->input->post('Remarks');
+            
+
+            $this->db->where('id', $param2);
+            $this->db->update('duty_roster', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/duty_roster/', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('duty_roster', array(
+                'id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('id', $param2);
+            $this->db->delete('duty_roster');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/duty_roster/', 'refresh');
+        }
+        $page_data['acdSession']    = $this->db->get('duty_roster')->result_array();
+        $page_data['page_name']  = 'duty_roster';
+        $page_data['page_title'] = get_phrase('exam_duty_roster');
+        $this->load->view('backend/index', $page_data);
+    }
+  
     function manage_attendance($date='',$month='',$year='',$class_id='')
     {
         if($this->session->userdata('admin_login')!=1)redirect('login' , 'refresh');
