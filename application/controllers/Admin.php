@@ -317,6 +317,18 @@ class Admin extends CI_Controller
             $this->load->view('backend/index', $page_data);
         }
     }
+    function questions_paper_preview($param1 = '', $param2 = '', $param3 = ''){
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        //$this->load->library('image_lib');
+        if ($param1 == 'preview') {
+            if ($this->session->userdata('admin_login') != 1)
+                redirect(base_url(), 'refresh');
+            $page_data['page_name']  = 'question_paper_preview';
+            $page_data['page_title'] = get_phrase('question_paper_preview');
+            $this->load->view('backend/index', $page_data);
+        }
+    }
     function online_admission($param1 = '', $param2 = '', $param3 = '')
      {
         if ($this->session->userdata('admin_login') != 1)
@@ -2343,9 +2355,9 @@ width: 100%;
             $data['ExamName']         = $this->input->post('ExamName');
             $data['CourseName']         = $this->input->post('CourseName');
             $data['Time']         = $this->input->post('Time');
-            echo $data['FullMarks']         = $this->input->post('FullMarks');
+            $data['FullMarks']         = $this->input->post('FullMarks');
             $data['Notification']         = $this->input->post('Notification');
-            echo $data['Contents']         = $this->input->post('Contents');
+            $data['Contents']         = $this->input->post('Contents');
             //exit();
             $this->db->insert('questions_paper_setup', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));

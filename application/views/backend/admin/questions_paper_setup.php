@@ -3,11 +3,11 @@
 
         <!------CONTROL TABS START------>
         <ul class="nav nav-tabs bordered">
-            <li class="active">
+            <li>
                 <a href="#list" data-toggle="tab"><i class="entypo-menu"></i>
                     <?php echo get_phrase('questions_paper_setup');?>
                 </a></li>
-            <li>
+            <li class="active">
                 <a href="#add" data-toggle="tab"><i class="entypo-plus-circled"></i>
                     <?php echo get_phrase('add_record');?>
                 </a></li>
@@ -16,7 +16,7 @@
 
         <div class="tab-content">
             <!----TABLE LISTING STARTS-->
-            <div class="tab-pane box active" id="list">
+            <div class="tab-pane box" id="list">
 
                 <table class="table table-bordered datatable" id="table_export">
                     <thead>
@@ -76,7 +76,7 @@
                             </td>
                             <td><?php echo $row['Time'];?></td>
                             <td><?php echo $row['Notification'];?></td>
-                            <td><?php echo $row['Contents'];?></td>
+                            <td><?php echo stripslashes($row['Contents']);?></td>
                             <td>
                                 <a href="#" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/modal_edit_questions_paper_setup/<?php echo $row['id'];?>');">
                                     <i class="entypo-pencil"></i>
@@ -95,9 +95,9 @@
 
 
             <!----CREATION FORM STARTS---->
-            <div class="tab-pane box" id="add" style="padding: 5px">
+            <div class="tab-pane box active" id="add" style="padding: 5px">
                 <div class="box-content">
-                    <?php echo form_open(base_url() . 'index.php?admin/questions_paper_setup/create' , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
+                    <?php echo form_open(base_url() . 'index.php?admin/questions_paper_preview/preview' , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
                     <div class="padded">
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo get_phrase('program_name');?></label>
@@ -158,8 +158,16 @@
                             <div class="col-sm-5">
                                 <select name="ExamName" class="form-control">
                                     <option value="#"><?php echo get_phrase('select'); ?></option>
-                                    <option value="First Phase">First Phase</option>
-                                    <option value="Final Phase">Final Phase</option>
+                                    <?php
+                                    $ase = $this->db->get('exam_phase')->result_array();
+                                    foreach($ase as $rqoa2):
+                                        ?>
+                                        <option value="<?php echo $rqoa2['id'];?>">
+                                            <?php echo $rqoa2['name'];?>
+                                        </option>
+                                        <?php
+                                    endforeach;
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -196,19 +204,25 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo get_phrase('notification');?></label>
                             <div class="col-sm-9">
-                                <textarea class="notification form-control" name="Notification" id="" cols="30" rows="3"></textarea>
+                                <!-- <textarea class="notification form-control" name="Notification" id="" cols="" rows=""></textarea> -->
+                                <textarea name="Notification" style="width: 700px; height: 100px;">
+                                       
+                                </textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo get_phrase('Questions');?></label>
                             <div class="col-sm-9">
-                                <textarea name="Contents" id="mytextarea"></textarea>
+                                <!-- <textarea name="Contents" id="mytextarea"></textarea> -->
+                                <textarea name="Contents" style="width: 700px; height: 300px;">
+                                       
+                                </textarea>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-5">
-                            <button type="submit" class="btn btn-info"><?php echo get_phrase('questions_paper_setup');?></button>
+                            <button type="submit" class="btn btn-info"><?php echo get_phrase('print_preview');?></button>
                         </div>
                     </div>
                     </form>
@@ -238,3 +252,7 @@
         selector : "#mytextarea"
     });
 </script>-->
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> 
+<script type="text/javascript">
+    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+</script>
