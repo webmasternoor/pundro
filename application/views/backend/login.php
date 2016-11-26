@@ -9,7 +9,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Neon Admin Panel" />
+	<meta name="description" content="Admin Panel" />
 	<meta name="author" content="" />
 
 	<title><?php echo get_phrase('login');?> | <?php echo $system_title;?></title>

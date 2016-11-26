@@ -118,6 +118,12 @@ foreach ( $edit_data as $row):
                         <input type="text" class="form-control" name="Particulars" value="<?php echo $row['Particulars'];?>"/>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo get_phrase('Date');?></label>
+                    <div class="col-sm-5">
+                        <input type="Date" class="form-control" name="DateSale" value="<?php echo $row['DateSale'];?>"/>
+                    </div>
+                </div>
             		<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-5">
 							<button type="submit" class="btn btn-info"><?php echo get_phrase('edit_money_receipt');?></button>

@@ -834,6 +834,10 @@ div.row.student div#list div form div td label input {
     border-bottom: 1px solid #f2f2f2 !important;
     padding: 0;
 }
+.form-groups-bordered .form-group{
+    border-bottom: 1px solid #f2f2f2 !important;
+    padding: 0;
+}
 div.student .form-horizontal .control-label,
 button.btn.btn-info,
 .nav-tabs a {
@@ -1059,4 +1063,39 @@ div.form-style-10.form-style-preview div.inner-wrap select {
 }
 div.quesedit b{
     float: right;
+}
+div.manage_profile ul.nav-tabs>li>a{
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+}
+div.teachertable select,
+div.teachertable input[type="text"], 
+div.teachertable input[type="email"],
+div.teachertable input[type="number"],
+div.teachertable textarea{
+    border: 0;
+    border-radius: 0;
+    box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
+    background: #f2f2f2;
+    pointer-events: none;
+}
+.form-group.attendancerecords table tr td {
+    width: 700px;
+    border: 1px solid #cccccc;
+    text-align: center;
+}
+.form-group.attendancerecords table tr td div{
+    width: 100px;
+}
+div.tab-content div.tab-pane.box table.table321 tr td a.temp {
+    color: #ffffff;
+    font-weight: normal;
+    background-image: url(../../uploads/attendance.png) !important;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    float: left;
+    font-size: 11px;
+    margin: 2px !important;
+    padding-left: 14px !important;
 }

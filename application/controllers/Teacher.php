@@ -132,6 +132,92 @@ class Teacher extends CI_Controller
         }
     }
 
+    function attendance_pundro($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('teacher_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            //echo "here";
+            //exit();
+            $data['ProgramName']         = $this->input->post('ProgramName');
+            $data['CourseInstructor']         = $this->input->post('CourseInstructor');
+            $data['BatchName']         = $this->input->post('BatchName');
+            $data['CourseCode']         = $this->input->post('CourseCode');
+            $data['SemesterName']         = $this->input->post('SemesterName');
+            //$data['Session']         = $this->input->post('Session');
+            $data['Year']         = $this->input->post('Year');
+            $data['ExamName']         = $this->input->post('ExamName');
+            $data['AttendanceDate']         = $this->input->post('AttendanceDate');
+
+            $particulars1 = implode(',', $this->input->post('particulars1[]'));
+            $particulars2 = implode(',', $this->input->post('particulars2[]'));
+            $data['StudentID'] = json_encode($particulars1);
+            $data['STDAtten'] = json_encode($particulars2);
+            //$data['StdRoll']         = $this->input->post('StdRoll');
+            //$data['AttendanceStatus']         = $this->input->post('AttendanceStatus');
+            //exit();
+            $data['ClassStrt']         = $this->input->post('ClassStrt');
+            $data['ClassEnd']         = $this->input->post('ClassEnd');
+
+            $strz = substr($data['StudentID'],1,-1);
+            $valz = explode(',', $strz);
+            $strx = substr($data['STDAtten'],1,-1);
+            $valx = explode(',', $strx);
+
+            //echo $data['StudentID'] = sizeof($this->input->post('particulars1[]'));
+            //exit();
+
+            for($i=0;$i<sizeof($this->input->post('particulars1[]'));$i++){
+                $reg_dat14 = array(
+                    'ProgramName'         => $this->input->post('ProgramName'),
+                    'CourseInstructor'         => $this->input->post('CourseInstructor'),
+                    'BatchName'         => $this->input->post('BatchName'),
+                    'CourseCode'         => $this->input->post('CourseCode'),
+                    'SemesterName'         => $this->input->post('SemesterName'),
+                    'Year'         => $this->input->post('Year'),
+                    'ExamName'         => $this->input->post('ExamName'),
+                    'AttendanceDate'         => $this->input->post('AttendanceDate'),
+                    'ClassStrt'         => $this->input->post('ClassStrt'),
+                    'ClassEnd'         => $this->input->post('ClassEnd'),
+                    'StudentID'   => $valz[$i],
+                    'STDAtten'   =>$valx[$i],
+                );
+                $this->db->insert('attendance_pundro', $reg_dat14);
+            }
+            //exit();
+
+            //$this->db->insert('attendance_pundro', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?teacher/class_routine/', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            //$data['fee_category']         = $this->input->post('fee_category');
+            $data['receipt_no']         = $this->input->post('receipt_no');
+            $data['description']         = $this->input->post('description');
+            //$data['fee_type']         = $this->input->post('fee_type');
+
+            $this->db->where('id', $param2);
+            $this->db->update('attendance_pundro', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/attendance_pundro/', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('attendance_pundro', array(
+                'id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('id', $param2);
+            $this->db->delete('attendance_pundro');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/attendance_pundro/', 'refresh');
+        }
+        //$page_data['acdSession']    = $this->db->get('attendance_pundro')->result_array();
+        $page_data['acdSession']    = $this->db->get('subjects')->result_array();
+        $page_data['page_name']  = 'attendance_pundro';
+        $page_data['page_title'] = get_phrase('attendance');
+        $this->load->view('backend/index', $page_data);
+    }
+
     function get_class_section($class_id)
     {
         $sections = $this->db->get_where('section' , array(
@@ -270,11 +356,11 @@ class Teacher extends CI_Controller
         if ($this->session->userdata('teacher_login') != 1)
             redirect(base_url() . 'index.php?login', 'refresh');
         if ($param1 == 'update_profile_info') {
-            $data['name']        = $this->input->post('name');
+            $data['InstructorName']        = $this->input->post('name');
             $data['email']       = $this->input->post('email');
             
-            $this->db->where('teacher_id', $this->session->userdata('teacher_id'));
-            $this->db->update('teacher', $data);
+            $this->db->where('id', $this->session->userdata('teacher_id'));
+            $this->db->update('course_instructor', $data);
             move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $this->session->userdata('teacher_id') . '.jpg');
             $this->session->set_flashdata('flash_message', get_phrase('account_updated'));
             redirect(base_url() . 'index.php?teacher/manage_profile/', 'refresh');
@@ -300,14 +386,14 @@ class Teacher extends CI_Controller
         }
         $page_data['page_name']  = 'manage_profile';
         $page_data['page_title'] = get_phrase('manage_profile');
-        $page_data['edit_data']  = $this->db->get_where('teacher', array(
-            'teacher_id' => $this->session->userdata('teacher_id')
+        $page_data['edit_data']  = $this->db->get_where('course_instructor', array(
+            'id' => $this->session->userdata('id')
         ))->result_array();
         $this->load->view('backend/index', $page_data);
     }
     
     /**********MANAGING CLASS ROUTINE******************/
-    function class_routine($param1 = '', $param2 = '', $param3 = '')
+    /*function class_routine($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('teacher_login') != 1)
             redirect(base_url(), 'refresh');
@@ -342,6 +428,23 @@ class Teacher extends CI_Controller
         }
         $page_data['page_name']  = 'class_routine';
         $page_data['page_title'] = get_phrase('manage_class_routine');
+        $this->load->view('backend/index', $page_data);
+    }*/
+    function class_routine($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('teacher_login') != 1)
+            redirect(base_url(), 'refresh');
+        //echo $this->session->userdata('id');
+        $this->db->where('id', $this->session->userdata('id'));
+        $ttee = $this->db->get('course_instructor')->result_array();
+        foreach($ttee as $rrr):
+            //echo $rrr['NameofBatch'];
+        endforeach;
+        //exit();
+        $this->db->where('InstructorName',$rrr['id']);
+        $page_data['acdSession']    = $this->db->get('class_routine_pundro')->result_array();
+        $page_data['page_name']  = 'class_routine';
+        $page_data['page_title'] = get_phrase('class_routine');
         $this->load->view('backend/index', $page_data);
     }
 	

@@ -676,7 +676,7 @@ endforeach;
 									<tr>
 										<td><label>Post Office <input type="text" name="PermanentPostOffice" /></label></td>
 										<td><label>Fax No <input type="text" name="PermanentFaxNo" /></label></td>
-										<td><label>E-mail <input type="email" name="PermanentEmail" /></label></td>
+										<td><label>E-mail <input type="text" name="PermanentEmail" /></label></td>
 									</tr>
 								</table>
 							</div>
@@ -747,7 +747,7 @@ endforeach;
 													?>
 												</select>
 											</label></td>
-										<td><label>GPA <input type="text" required name="CertificateCGPA1" id="CertificateCGPA1"/></label></td>
+										<td><label>GPA/Marks <input type="text" required name="CertificateCGPA1" id="CertificateCGPA1"/></label></td>
 										<td colspan="3"><label>Add Certificate <input type="file" name="CertificateDocumentscert1" id="CertificateDocumentscert1"/></label></td>
 										<td colspan="3"><label>Add Marksheet <input type="file" name="CertificateDocumentsmark1" id="CertificateDocumentsmark1"/></label></td>
 									</tr>
@@ -818,7 +818,7 @@ endforeach;
 													?>
 												</select>
 											</label></td>
-										<td><label>GPA <input type="text" required name="CertificateCGPA2" id="CertificateCGPA2"/></label></td>
+										<td><label>GPA/Marks <input type="text" required name="CertificateCGPA2" id="CertificateCGPA2"/></label></td>
 										<td colspan="3"><label>Add Certificate <input type="file" name="CertificateDocumentscert2" id="CertificateDocumentscert2"/></label></td>
 										<td colspan="3"><label>Add Marksheet <input type="file" name="CertificateDocumentsmark2" id="CertificateDocumentsmark2"/></label></td>
 										</tr>
@@ -835,13 +835,13 @@ endforeach;
 												<tr>
 													<td><label>Address <textarea required type="text" name="ReferenceAddress1" id="ReferenceAddress1"></textarea></label></td>
 												</tr>
-												<tr><td><label>Phone No<input required type="number" name="ReferencePhone1"/></label></td>
+												<tr><td><label>Phone No<input type="number" name="ReferencePhone1"/></label></td>
 												</tr>
 												<tr>
-													<td><label>Mobile No<input required type="number" name="ReferenceMobile1" id="ReferenceMobile1"/></label></td>
+													<td><label>Mobile No<input type="number" name="ReferenceMobile1" id="ReferenceMobile1"/></label></td>
 												</tr>
 												<tr>
-													<td><label>E-mail<input required type="email" name="ReferenceEmail1" id="ReferenceEmail1"/></label></td>
+													<td><label>E-mail<input type="text" name="ReferenceEmail1" id="ReferenceEmail1"/></label></td>
 												</tr>
 											</table>
 										</td>
@@ -854,7 +854,7 @@ endforeach;
 												</tr>
 												<tr><td><label>Phone No<input type="number" name="ReferencePhone2" /></label></td></tr>
 												<tr><td><label>Mobile No<input type="number" name="ReferenceMobile2" /></label></td></tr>
-												<tr><td><label>E-mail<input type="email" name="ReferenceEmail2"/></label></td></tr>
+												<tr><td><label>E-mail<input type="text" name="ReferenceEmail2"/></label></td></tr>
 											</table>
 										</td>
 									</tr>
@@ -893,15 +893,17 @@ endforeach;
 							<div class="section"><span>6</span>Declaration:</div>
 							<div class="inner-wrap">
 								<div class="declaration">
-									<span>I hereby accept that, I will be bound by the rules, regulations and student code of conduct of Pundro University of Science & Technology.</br>I hereby certify that the above statements are correct and complete to the best of my knowledge. I am aware that withholding requested in this application or giving false information will me ineligible for admission into PUST and will render me liable for dismissal, if admitted.</span>
+									<span>I hereby accept that, I will be bound by the rules, regulations and student code of conduct of Pundra University of Science & Technology.</br>I hereby certify that the above statements are correct and complete to the best of my knowledge. I am aware that withholding requested in this application or giving false information will me ineligible for admission into PUST and will render me liable for dismissal, if admitted.</span>
 									<br/><br/><span class="privacy-policy">
-				   <input type="checkbox" name="terms12" value="check" id="terms12">You agree to our Terms and Policy.
+				   <input type="checkbox" name="terms12" value="check" id="terms12">&nbsp; I agree to your Terms and Policy.
 			    </span>
 								</div>
 								</br></br>
 								<table>
 									<tr>
 										<td ><label>Signature of Applicant: <input type="file" name="SignatureApplicant" /></label></td>
+										<td><label>Application Date: <input type="text" required class="datepicker" name="ApplicationDate" id="ApplicationDate"/>
+										</label></td>
 									</tr>
 								</table>
 							</div>

@@ -241,6 +241,24 @@ for($i=0;$i<8;$i++){
 ?>
 /*********************************************************************************************/
 <?php
+for($i=0;$i<8;$i++){
+        /*$reg_dat13 = array(
+        'AdmMarksObtained'   => $val1213[$i],
+        'RegisterNumber'   =>$val12[$i],
+        'TotalMark'   =>$TotalMark,
+    );
+        $this->db->insert('admission_mark_setup', $reg_dat13);*/
+        $reg_dat14 = array(
+            'AdmMarksObtained'   => $val1213[$i],
+            //'id'   =>$val12[$i],
+            'TotalMarkAdm'   =>$TotalMark,
+        );
+        $this->db->where('id', $val12[$i]);
+        $this->db->update('applicants_details', $reg_dat14);
+    }
+?>
+/*********************************************************************************************/
+<?php
 for ($i=0, $k=10; $i<=10 ; $i++, $k--) {
     echo "Var " . $i . " is " . $k . "<br>";
 }
@@ -376,4 +394,21 @@ width: 100%;
              echo "</div>";
              echo "</div>";
 
-/***********************************************************************************************************/             
+/****************************************************************************************************/             
+echo $this->uri->segment(3);
+/****************************************************************************************************/             
+if(strlen($NewClassRoll) == 1){
+    $f = "00";
+    $NewClassRoll = $f.$NewClassRoll;
+    //echo $NewClassRoll = $f.$NewClassRoll12;
+}
+if(strlen($NewClassRoll) == 2){
+    $f = "0";
+    $NewClassRoll = $f.$NewClassRoll;
+    //echo $NewClassRoll = $f.$NewClassRoll12;
+}
+/***********************************************************************************************/
+<?php $count = 1;foreach($acdSession as $row):?>
+<tr>
+    <td><?php echo $count++;?></td>
+/***********************************************************************************************/

@@ -19,7 +19,7 @@
 		<div class="tab-content">
         	<!----EDITING FORM STARTS-->
 			<div class="tab-pane box active" id="list" style="padding: 5px">
-                <div class="box-content">
+                <div class="box-content teachertable">
 					<?php
                     foreach($edit_data as $row):
                         ?>
@@ -134,9 +134,7 @@
                         <div class="form-group">
                             <label class="col-md-5 control-label"><?php echo get_phrase('photo');?></label>
                             <div class="col-md-6">
-                                <a target="_blank" href="<?php echo "uploads/student_image/".$row[PhotoApplicant]; ?>"><img src="<?php echo "uploads/student_image/".$row[PhotoApplicant]; ?>" width="150" height="150" /></a>
-                                <br/>
-                                <label>Upload Aplicant Photo<input type="file" name="PhotoApplicant" id="photoApplicant"/></label>
+                                <a target="_blank" href="<?php echo "uploads/student_image/".$row[PhotoApplicant]; ?>"><img src="<?php echo "uploads/student_image/".$row[PhotoApplicant]; ?>" width="200" height="150" /></a>
                             </div>
                         </div>
                         <div class="form-group">

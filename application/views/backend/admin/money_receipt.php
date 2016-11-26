@@ -111,10 +111,11 @@ endforeach;
                             <th><div><?php echo get_phrase('semester_name');?></div></th>
                             <th><div><?php echo get_phrase('year');?></div></th>
                             <th><div><?php echo get_phrase('name');?></div></th>
-                            <th><div><?php echo get_phrase('mobile_number');?></div></th>
+                            <th><div><?php echo get_phrase('reference_number');?></div></th>
                             <th><div><?php echo get_phrase('email');?></div></th>
                             <th><div><?php echo get_phrase('amount');?></div></th>
                             <th><div><?php echo get_phrase('particulars');?></div></th>
+                            <th><div><?php echo get_phrase('date');?></div></th>
                             <th><div><?php echo get_phrase('options');?></div></th>
                         </tr>
                         </thead>
@@ -148,6 +149,7 @@ endforeach;
                                 <td><?php echo $row['Email'];?></td>
                                 <td><?php echo $row['Amount'];?></td>
                                 <td><?php echo $row['Particulars'];?></td>
+                                <td><?php echo $row['DateSale'];?></td>
                                 <td>
                                     <a href="#" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/modal_edit_money_receipt/<?php echo $row['id'];?>');">
                                         <i class="entypo-pencil"></i>
@@ -196,11 +198,48 @@ endforeach;
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-sm-3">
+                            <!-- <div class="col-sm-3">
                                 <input type="hidden" readonly class="form-control" name="SemesterName" value="<?php echo $wee12['id']?>"/>
-                            </div>
-                            <div class="col-sm-2">
+                            </div> -->
+                            <!-- <div class="col-sm-2">
                                 <input type="hidden" readonly class="form-control" name="Year" value="<?php echo $wee13['id'];?>"/>
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><?php echo get_phrase('session_Name');?></label>
+                            <div class="col-sm-5">
+                                <select required name="SemesterName" class="form-control">
+                                    <option value=""><?php echo get_phrase('select');?></option>
+                                    <?php
+                                    $faculty_setupq = $this->db->get('session_pundro')->result_array();
+                                    foreach($faculty_setupq as $rowq):
+                                        ?>
+                                        <option value="<?php echo $rowq['id'];?>">
+                                            <?php echo $rowq['SessionName'];?>
+                                        </option>
+                                        <?php
+                                    endforeach;
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><?php echo get_phrase('Year');?></label>
+                            <div class="col-sm-5">
+                                <select required name="Year" class="form-control">
+                                    <option value=""><?php echo get_phrase('select');?></option>
+                                    <?php
+                                    $this->db->order_by('Name', ASC);
+                                    $faculty_setupqz = $this->db->get('year_calendar')->result_array();
+                                    foreach($faculty_setupqz as $rowqz):
+                                        ?>
+                                        <option value="<?php echo $rowqz['id'];?>">
+                                            <?php echo $rowqz['Name'];?>
+                                        </option>
+                                        <?php
+                                    endforeach;
+                                    ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -212,16 +251,19 @@ endforeach;
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo get_phrase('reference_number');?></label>
                             <div class="col-sm-5">
-                                <input type="number" required class="form-control" name="MobileNumber" minlength="11" placeholder="01914191945"/>
+                                <!-- <input type="number" required class="form-control" name="MobileNumber" minlength="11" placeholder="01914191945"/> -->
+                                <input type="number" class="form-control" name="MobileNumber" placeholder="01914191945"/>
                             </div>
-                            <div class="col-sm-3">(At Least 11 Characters)</div>
+                            <!-- <div class="col-sm-3">(At Least 11 Characters)</div> -->
+                            <div class="col-sm-3">(Only Numbers allow)</div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo get_phrase('email');?></label>
                             <div class="col-sm-5">
-                                <input type="email" required class="form-control" name="Email" placeholder="webmaster.noor@gmail.com"/>
+                                <!-- <input type="email" required class="form-control" name="Email" placeholder="webmaster.noor@gmail.com"/> -->
+                                <input type="text" class="form-control" name="Email" placeholder="webmaster.noor@gmail.com"/>
                             </div>
-                            <div class="col-sm-3">(Valid Email format)</div>
+                            <!-- <div class="col-sm-3">(Valid Email format)</div> -->
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo get_phrase('amount');?></label>
@@ -229,6 +271,12 @@ endforeach;
                                 <input type="number" required class="form-control" name="Amount" placeholder="500"/>
                             </div>
                             <div class="col-sm-3">(Only Numbers allow)</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><?php echo get_phrase('Date');?></label>
+                            <div class="col-sm-5">
+                                <input type="Date" class="form-control" name="DateSale" placeholder="500"/>
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-5">

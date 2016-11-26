@@ -81,13 +81,13 @@ class Login extends CI_Controller {
         }
 
         // Checking login credential for teacher
-        $query = $this->db->get_where('course_instructor', $credential);
+        $query = $this->db->get_where('teacher', $credential);
         if ($query->num_rows() > 0) {
             $row = $query->row();
             $this->session->set_userdata('teacher_login', '1');
-            $this->session->set_userdata('id', $row->id);
-            $this->session->set_userdata('login_user_id', $row->id);
-            $this->session->set_userdata('InstructorName', $row->InstructorName);
+            $this->session->set_userdata('teacher_id', $row->teacher_id);
+            $this->session->set_userdata('login_user_id', $row->teacher_id);
+            $this->session->set_userdata('name', $row->name);
             $this->session->set_userdata('login_type', 'teacher');
             return 'success';
         }

@@ -452,7 +452,8 @@ class Admin extends CI_Controller
              $d=strtotime("+11 hours");
              $ttt1 = date("h:i:sa", $d);
              $datetime = $ttt.$ttt1;
-             $data['ApplicationDate']                 = $datetime;
+             $data['ApplicationDate']                 = date('Y-m-d',strtotime($this->input->post('ApplicationDate')));
+             //$datetime;
              //echo $_FILES['PhotoApplicant']['name'];
              //$this->db->insert('applicants_details', $data);
              //exit();
@@ -4250,6 +4251,7 @@ width: 100%;
             $data['Year']         = $this->input->post('Year');
             $data['CandidateName']         = $this->input->post('CandidateName');
             $data['MobileNumber']         = $this->input->post('MobileNumber');
+            $data['DateSale'] = date('Y-m-d',strtotime($this->input->post('DateSale')));
             $this->db->where('MobileNumber', $data['MobileNumber']);
             $aass = $this->db->get('money_receipt')->result_array();
             foreach($aass as $r334s):
@@ -4330,7 +4332,7 @@ width: 100%;
             echo "Candidate Name: ";
             echo $data['CandidateName'];
             echo "<br/>";
-            echo "Reference No.(Mobile Number): ";
+            echo "Reference No.: ";
             echo $data['MobileNumber'];
             echo "<br/>";
             echo "Email: ";
@@ -4415,6 +4417,7 @@ width: 100%;
             $data['MobileNumber']         = $this->input->post('MobileNumber');
             $data['Email']         = $this->input->post('Email');
             $data['Amount']         = $this->input->post('Amount');
+            $data['DateSale'] = date('Y-m-d',strtotime($this->input->post('DateSale')));
             $data['Particulars']         = $this->input->post('Particulars');
 
             $this->db->where('id', $param2);
@@ -10336,6 +10339,8 @@ width: 100%;
             $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
             redirect(base_url() . 'index.php?admin/class_routine/', 'refresh');
         }
+        $this->session->test('test');
+        //$page_data['asas']  = 'class_routine';
         $page_data['page_name']  = 'class_routine';
         $page_data['page_title'] = get_phrase('manage_class_routine');
         $this->load->view('backend/index', $page_data);
