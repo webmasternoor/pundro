@@ -25,35 +25,46 @@
 				</div>
 			</div>
 			<div class="row"  id="fontSize"> 
-				<div class="col-md-7" > 
-					<label for="name">Name:</label>
-                                        
-                                        <strong><?php echo $row['NameofApplicant'];?></strong>
-                                        
-					
+				<div class="col-md-5" > 
+					<label for="name">Name:</label><strong><?php echo $row['NameofApplicant'];?></strong>                 
 				</div>
-				<div class="col-md-5"> 
-					<label for="program">Program:</label>
-					<strong><?php 
-                                        $this->db->where('id',$studentId);
-                                        $courseCode = $this->db->get('std_fee_collection')->result_array();
-                                        foreach ($courseCode as $courseName):
-                                            
+				<div class="col-md-7"> 
+                                    <div><label for="program">Program:</label></div>
+					<div><strong><?php 
+                                        $this->db->where('RegistratioNo', $studentId);
+                                        $courseCode = $this->db->get('student_pundro')->result_array();
+                                        foreach ($courseCode as $courseCodeEx):
+                                            $courseCodeNe = $courseCodeEx['NameofProgram'];
                                         endforeach;
-                                        echo $courseName['course_name'];
-                                        ?></strong>
+                                        $this->db->where('id', $courseCodeNe);
+                                        $courseName = $this->db->get('course_program')->result_array();
+                                        foreach ($courseName as $courseNameEx):
+                                            echo $courseNameEx['course_name'];
+                                        endforeach;
+                                        ?></strong></div>
 				</div>
+                        </div>
+    <div class="row">
 				<div class="col-md-3"> 
 					<label for="reg">ID/Regi. No:</label>
-					<strong><?php echo $row[''];?></strong>
+					<strong><?php echo $row['RegistratioNo'];?></strong>
 				</div>
 				<div class="col-md-3"> 
 					<label for="session">Session:</label>
-					<strong><?php echo $row[''];?></strong>
+					<strong><?php 
+                                        $sessionCode = $row['Session'];
+                                        $this->db->where('id', $sessionCode);
+                                        $sessionName = $this->db->get('session_pundro')->result_array();
+                                        foreach($sessionName as $sessionNameEx):
+                                            echo $sessionNameEx['SessionName'];
+                                        endforeach;
+                                        ?></strong>
 				</div>
 				<div class="col-md-3"> 
-					<label for="semister">Semester:</label>
-					<strong><?php echo $row[''];?></strong>
+					<label for="semester">Semester:</label>
+					<strong><?php 
+                                        echo $row[''];
+                                        ?></strong>
 				</div>
 				<div class="col-md-3"> 
 					<label for="batch">Batch No:</label>
