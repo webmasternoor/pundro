@@ -5212,11 +5212,11 @@ width: 100%;
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-        $data['ProgramName']         = $this->input->post('ProgramName');
-        $data['SemesterName']         = $this->input->post('SemesterName');
+        $data['ProgramName']     = $this->input->post('ProgramName');
+        $data['SemesterName']    = $this->input->post('SemesterName');
         $page_data['acdSession'] = $this->db->where('ProgramName', $data['ProgramName']);
         $page_data['acdSession'] = $this->db->where('SemesterName', $data['SemesterName']);
-        $page_data['acdSession']    = $this->db->get('semester_particulars')->result_array();
+        $page_data['acdSession'] = $this->db->get('semester_particulars')->result_array();
         $page_data['page_name']  = 'fee_condition';
         $page_data['page_title'] = get_phrase('fee_condition');
         $this->load->view('backend/index', $page_data);
@@ -6218,64 +6218,6 @@ width: 100%;
             redirect(base_url(), 'refresh');
         $page_data['page_name']  = 'import_data_from_bank';
         $page_data['page_title'] = get_phrase('import_data_from_bank');
-        $this->load->view('backend/index', $page_data);
-    }
-    function student_id_card($param1 = '', $param2 = '', $param3 = '')
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-
-        if ($param1 == 'do_update') {
-            //$data['name_en']        = $this->input->post('name_en');
-            //$data['name_bn']        = $this->input->post('name_bn');
-            $data['pay_status']        = $this->input->post('pay_status');
-            $data['name']        = $this->input->post('name');
-            $data['birthday']        = $this->input->post('birthday');
-            $data['sex']        = $this->input->post('sex');
-            $data['religion']        = $this->input->post('religion');
-            $data['blood_group']        = $this->input->post('blood_group');
-            $data['address']        = $this->input->post('address');
-            $data['phone']        = $this->input->post('phone');
-            $data['email']        = $this->input->post('email');
-            $data['password']        = $this->input->post('password');
-            $data['father_name']        = $this->input->post('father_name');
-            $data['mother_name']        = $this->input->post('mother_name');
-            $data['roll']        = $this->input->post('roll');
-            $data['personal_register_number']        = $this->input->post('register_number');
-            $data['personal_joining_date']        = $this->input->post('joining_date');
-            $data['personal_department']        = $this->input->post('personal_department');
-            $data['personal_batch']        = $this->input->post('personal_batch');
-
-            /*$data['birthday']    = $this->input->post('birthday');
-            $data['sex']         = $this->input->post('sex');
-            $data['address']     = $this->input->post('address');
-            $data['phone']       = $this->input->post('phone');
-            $data['email']       = $this->input->post('email');*/
-            //exit();
-            $this->db->where('student_id', $param2);
-            $this->db->update('student', $data);
-//            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $param2 . '.jpg');
-            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            redirect(base_url() . 'index.php?admin/student_id_card/', 'refresh');
-        } else if ($param1 == 'personal_profile') {
-            $page_data['personal_profile']   = true;
-            $page_data['current_teacher_id'] = $param2;
-        } else if ($param1 == 'edit') {
-            $page_data['edit_data'] = $this->db->get_where('student', array(
-                'student_id' => $param2
-            ))->result_array();
-        }
-        if ($param1 == 'delete') {
-            $this->db->where('id', $param2);
-            $this->db->delete('osad_student');
-            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(base_url() . 'index.php?admin/student_id_card/', 'refresh');
-        }
-
-        $page_data['osadStudent']    = $this->db->where('applicant_status=','Registration');
-        $page_data['osadStudent']    = $this->db->get('osad_student_12')->result_array();
-        $page_data['page_name']  = 'student_id_card';
-        $page_data['page_title'] = get_phrase('student_id_card');
         $this->load->view('backend/index', $page_data);
     }
     function update_unsuccessful_data($param1 = '', $param2 = '', $param3 = '')
@@ -11196,4 +11138,65 @@ width: 100%;
         $this->load->view('backend/index', $page_data);
     }
     
+    function student_id_card($param1) {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        $BatchName = $this->input->post('BatchName');
+        $this->db->where('NameofBatch =', $BatchName);
+        $page_data['q'] = $this->db->get('student_pundro')->result_array();   
+        $page_data['page_name'] = 'student_id_card';
+        $page_data['page_title'] = get_phrase('student_id_card');
+        $this->load->view('backend/index', $page_data);
+    }
+    function student_id_card_preview($param1 = '') {
+       
+        if($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if($param1 == 'preview'){ 
+            $StudentId = $this->input->post('RegistrationNo');
+            $this->db->where('RegistratioNo = ', $StudentId);
+            $page_data['q'] = $this->db->get('student_pundro')->result_array();
+            $page_data['page_name'] = 'student_id_card_preview';
+            $page_data['page_title'] = get_phrase('student_id_card');
+            $this->load->view('backend/index', $page_data);
+        }   
+}
+    function exam_admit_card($param1){
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+       
+        
+        if($this->input->post('TermName') == 1){    
+            $BatchName = $this->input->post('BatchName');
+            $semesterName = $this->input->post('SemesterName');
+            $termName = $this->input->post('TermName');   
+            
+            $this->db->where('NameofBatch', $BatchName);
+            $page_data['studentPundraDB'] = $this->db->get('student_pundro')->result_array();           
+
+            $this->db->where('BatchName', $BatchName);
+            $this->db->where('semester_name', $semesterName);
+            $page_data['std_fee_collectionDB'] = $this->db->get('std_fee_collection')->result_array();
+               
+            $page_data['page_name'] = 'exam_admit_card';
+            $this->load->view('backend/index', $page_data);
+        }
+        else{             
+        $page_data['page_name'] = 'exam_admit_card';
+        $page_data['page_title'] = get_phrase('exam_admit_card');
+        $this->load->view('backend/index', $page_data);
+        }
+    }
+    function exam_admit_card_preview($param1 = ''){
+        if($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if($param1 == 'preview'){ 
+            $StudentId = $this->input->post('RegistrationNo');
+            $this->db->where('RegistratioNo = ', $StudentId);
+            $page_data['q'] = $this->db->get('student_pundro')->result_array();
+            $page_data['page_name'] = 'exam_admit_card_preview';
+            $page_data['page_title'] = get_phrase('exam_admit_card');
+            $this->load->view('backend/index', $page_data);
+        }
+    }
 }

@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="assets/css/neon-forms.css">
 <link rel="stylesheet" href="assets/css/custom.css">
 <link rel="stylesheet" href="assets/css/dashboard.css">
+<link rel="stylesheet" href="assets/css/exam_admit_card_preview.css">
+<link rel="stylesheet" href="assets/pundra_id/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/pundra_id/css/student_id_card_preview.css">
 
 
 
@@ -85,6 +88,7 @@
 <script src="<?php echo base_url();?>assets/js/amcharts/gauge.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/amcharts/funnel.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/amcharts/radar.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/pundra_id/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/amcharts/exporting/amexport.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/amcharts/exporting/rgbcolor.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/amcharts/exporting/canvg.js" type="text/javascript"></script>
